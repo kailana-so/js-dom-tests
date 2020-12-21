@@ -1,7 +1,9 @@
 // Define a function named createDiv that takes no arguments.
 // Return a <div> element.
 function createDiv() {
-
+    let div = document.createElement('DIV');
+        // console.log(div);
+        return div;
 }
 
 
@@ -10,9 +12,11 @@ function createDiv() {
 //
 // Return a <div> element with the given className.
 function createDivWithClass(className) {
-
+    let div = document.createElement('DIV');
+    div.className = className;
+        // console.log(div);
+        return div;
 }
-
 
 // Define a function named updateTodoList that takes one argument.
 //   todoList (<ul> DOM element)
@@ -23,7 +27,22 @@ function createDivWithClass(className) {
 //     TIP: Applying a CSS class means adding on top of what's already there.
 //   * Make no change otherwise
 function updateTodoList(todoList) {
-
+    for (let i = 0; i < todoList.childNodes.length; i++) {
+        // Fixed this by grabbing the child nodes inside the loop, rather than outside... using a querySelector and a variable
+        // which was causing it to iterate ove 3 items rather than 4
+        let listItems = todoList.getElementsByTagName('li');
+        // then grabbed all the targetable 'li's
+        let str = listItems[i].textContent;
+        // then turned the textContent into a string (from an obj) so the .remove() function would work
+        // then passed in my if else statement... and Viola! lol
+        // also didn't use return bc we're only modifying and couldnt rely on console log bc... you can't log a removal?
+        if (str.startsWith('COMPLETED')) {
+            listItems[i].remove();
+        } else if (str.startsWith('URGENT')) {
+            listItems[i].className = listItems[i].className + ' ' + 'important';
+        }
+    }
+        
 }
 
 
