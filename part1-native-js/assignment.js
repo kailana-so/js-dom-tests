@@ -27,9 +27,11 @@ function createDivWithClass(className) {
 //     TIP: Applying a CSS class means adding on top of what's already there.
 //   * Make no change otherwise
 function updateTodoList(todoList) {
+    // console.log(todoList)
     for (let i = 0; i < todoList.childNodes.length; i++) {
-        // Fixed this by grabbing the child nodes inside the loop, rather than outside... using a querySelector and a variable
-        // which was causing it to iterate ove 3 items rather than 4
+        // Fixed this by grabbing the child nodes inside the loop, rather than outside... 
+        // using a querySelector and a variable on the outside
+        //  was causing it to iterate ove 3 items rather than 4 -- should probably revise scopes!
         let listItems = todoList.getElementsByTagName('li');
         // then grabbed all the targetable 'li's
         let str = listItems[i].textContent;
@@ -74,7 +76,28 @@ function updateTodoList(todoList) {
 //      <li><a href="https://www.devcommute.com">DevCommute</a></li>
 //    </ul>
 function createList(sites) {
+    let html = document.createElement('ul');
+    // first create the html markup obj ie. the ul
+    for (let i = 0; i < Object.keys(sites).length; i++){
+        let title = Object.keys(sites);
+        let url = Object.values(sites);
+        //then grab the key, value ie. 'TITLE': 'URL'
+        // console.log(title[i])
+        // console.log(url[i])
+        let li = document.createElement('li');
+        let a = document.createElement('a');
+        // then create you li and a tags
+        a.innerHTML = title[i];
+        a.href = url[i];
+        // then assign the values to the a tag. ie. 'TITLE': 'URL'
 
+        li.appendChild(a);
+        html.appendChild(li);
+        //then append them
+    };
+    // console.log(html)
+    return html;
+    // then thank your mum 
 }
 
 
@@ -103,8 +126,22 @@ function createList(sites) {
 // double quote as well.
 function extractQuote(article) {
 
-}
+    let para = article.firstChild;
+    paraStr = para.textContent;
 
+    if (paraStr.indexOf('"')> -1) {
+        let b = document.createElement('blockquote')
+        quote = paraStr.split('"')[1];
+        b.textContent = '"' + quote + '"';
+        console.log(b.textContent)
+        article.replaceChild(b, para);
+        return para;
+    } 
+    else {
+        console.log('no changes');
+    }
+    // console.log(paraStr)
+}
 
 // Define a function named createTable that takes one argument.
 //   data (array of arrays)
