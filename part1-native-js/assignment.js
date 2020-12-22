@@ -133,12 +133,13 @@ function extractQuote(article) {
         let b = document.createElement('blockquote')
         quote = paraStr.split('"')[1];
         b.textContent = '"' + quote + '"';
-        console.log(b.textContent)
+        // console.log(b.textContent)
         article.replaceChild(b, para);
         return para;
     } 
     else {
-        console.log('no changes');
+        return null;
+        // console.log('no changes');
     }
     // console.log(paraStr)
 }
@@ -192,5 +193,28 @@ function extractQuote(article) {
 // TIP: Assume that the elements of the data array are equal in length.
 // non working copy
 function createTable(data) {
+    // console.log(data);
+    // console.log(data.length);
+    // // this is the number of rows
+    // console.log(data[0].length);
+    // this is the number of columns
 
+    let table =  document.createElement('table');
+    let thead = document.createElement('thead');
+    let tbody = document.createElement('tbody');
+    let tfoot = document.createElement('tfoot');
+
+    for (let i = 0; i > data.length; i++){
+        let tr = document.createElement('tr');
+        
+
+        for (let e = 0; e > data[0].length; e++) {
+            let td = document.createElement('td');
+            let tableData = document.createTextNode(i + e)
+            console.log(tableData)
+            return tableData
+        }
+        console.log(tableData)
+    }
+    console.log(tableData)
 }
